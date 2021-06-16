@@ -16,6 +16,8 @@ class GameViewController: UIViewController {
     let buttonsView = UIView()
     var navigationBarHeight: CGFloat = 0.0
     var bombsArray = [Bool]()
+    var touchedBombs = [Int]()
+    
     
     // MARK: - Create ButtonsView
     override func loadView() {
@@ -38,6 +40,8 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        guard let bombsNumber = numberOfBombs else { return}
+        
     }
     
     
@@ -71,7 +75,6 @@ class GameViewController: UIViewController {
                 }
             }
         }
-        
     }
     
     // MARK: - buttonTapped
@@ -79,12 +82,14 @@ class GameViewController: UIViewController {
     @objc func buttonTapped(_ sender: UIButton) {
         let button = buttons[sender.tag]
         button.isEnabled = false
-        
-        // MARK: - Add bombs in the first click
         counter += 1
+        // in first click
+        
         if counter == 1 {
-            addBombs()
+            firstClick(buttonTag: button.tag)
         }
+        
+        
         
         // check if it's a bomb or not
         if bombsArray[button.tag] == true {
@@ -92,7 +97,7 @@ class GameViewController: UIViewController {
             button.setTitle("💣", for: .normal)
             gameOver()
         } else {
-            CheckNeighbors(buttonTag: button.tag)
+//            CheckNeighbors(buttonTag: button.tag)
             button.backgroundColor = button.tag %  2 == 0 ? .white :  UIColor(red: 250/255, green: 230/255, blue: 243/255, alpha: 1)
         }
         
@@ -100,9 +105,9 @@ class GameViewController: UIViewController {
     }
     
     // MARK: - Adding Bombs Func
-    func addBombs() {
+    func addBombs(notBombs: Int) {
         bombsArray.removeAll()
-        for _ in 0..<(buttons.count - (numberOfBombs ?? 0)) {
+        for _ in 0..<notBombs {
             bombsArray.append(false)
         }
         for _ in 0..<(numberOfBombs ?? 0) {
@@ -134,11 +139,12 @@ class GameViewController: UIViewController {
             button.setTitle("", for: .normal)
             bombsArray.shuffle()
         }
+        counter = 0
     }
     
     // MARK: - Check neiboughrs
-    func CheckNeighbors(buttonTag: Int) {
-        guard let columnNumber = numberOfColumns else { return }
+    func CheckNeighbors(buttonTag: Int) -> [Int] {
+        guard let columnNumber = numberOfColumns else { return []}
         var neighbors = [Int]()
         
         let nextLine = buttonTag + columnNumber
@@ -176,10 +182,36 @@ class GameViewController: UIViewController {
             neighbors = [buttonTag + 1, buttonTag - 1, nextLine, nextLine + 1, nextLine - 1, previousLine, previousLine + 1, previousLine - 1]
         }
         
+        return neighbors
         
+    }
+    
+    // MARK: - Add bombs in the first click
+    func firstClick(buttonTag: Int) {
+        touchedBombs = [Int](repeating: 0, count: buttons.count)
+        var neighbors = CheckNeighbors(buttonTag: buttonTag)
+        neighbors.append(buttonTag)
+        neighbors.sort()
+        
+        addBombs(notBombs: (buttons.count - (numberOfBombs ?? 0) - neighbors.count))
         for i in neighbors {
-            disable(button: buttons[i])
-//            buttonTapped(buttons[i])
+            bombsArray.insert(false, at: i)
+        }
+        touchingBombs()
+        print(touchedBombs.count)
+        print(buttons.count)
+        print(bombsArray.count)
+        print(touchedBombs)
+    }
+    func touchingBombs(){
+        
+        for button in buttons {
+            if bombsArray[button.tag] {
+                let neighbors = CheckNeighbors(buttonTag: button.tag)
+                for neighbor in neighbors {
+                    touchedBombs[neighbor] += 1
+                }
+            }
         }
     }
 }
