@@ -11,6 +11,7 @@ class GameViewController: UIViewController {
     var numberOfRows: Int?
     var numberOfBombs: Int?
     var numberOfColumns: Int?
+    var counter = 0
     var buttons = [UIButton]()
     let buttonsView = UIView()
     var navigationBarHeight: CGFloat = 0.0
@@ -70,7 +71,7 @@ class GameViewController: UIViewController {
                 }
             }
         }
-        addBombs()
+        
     }
     
     // MARK: - buttonTapped
@@ -79,6 +80,13 @@ class GameViewController: UIViewController {
         let button = buttons[sender.tag]
         button.isEnabled = false
         
+        // MARK: - Add bombs in the first click
+        counter += 1
+        if counter == 1 {
+            addBombs()
+        }
+        
+        // check if it's a bomb or not
         if bombsArray[button.tag] == true {
             button.backgroundColor = .red
             button.setTitle("💣", for: .normal)
@@ -160,6 +168,10 @@ class GameViewController: UIViewController {
                 neighbors = [buttonTag - 1, nextLine, nextLine - 1, previousLine, previousLine - 1]
             }
             
+        } else if (buttonTag + 1) % buttons.count < columnNumber {
+            neighbors = [buttonTag + 1, buttonTag - 1, nextLine, nextLine + 1, nextLine - 1]
+        } else if (buttonTag + 1) % buttons.count > (buttons.count - columnNumber ) {
+            neighbors = [buttonTag + 1, buttonTag - 1, previousLine, previousLine + 1, previousLine - 1]
         } else {
             neighbors = [buttonTag + 1, buttonTag - 1, nextLine, nextLine + 1, nextLine - 1, previousLine, previousLine + 1, previousLine - 1]
         }
