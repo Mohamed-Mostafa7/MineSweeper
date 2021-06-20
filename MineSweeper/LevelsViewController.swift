@@ -33,7 +33,7 @@ class LevelsViewController: UIViewController {
         if sender.tag == 0 {
             numberOfRows = 15
             numberOfColumns = 7
-            numberOfBombs = 30
+            numberOfBombs = 5
         } else if sender.tag == 1 {
             numberOfRows = 20
             numberOfColumns = 11
@@ -55,6 +55,7 @@ class LevelsViewController: UIViewController {
     
     func editButton(button: UIButton) {
         button.contentEdgeInsets = UIEdgeInsets(top: 5,left: 20,bottom: 5,right: 20)
+//        button.layer.masksToBounds = false
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.gray.cgColor
         button.layer.cornerRadius = 20
