@@ -33,7 +33,7 @@ class LevelsViewController: UIViewController {
         if sender.tag == 0 {
             numberOfRows = 15
             numberOfColumns = 7
-            numberOfBombs = 5
+            numberOfBombs = 10
         } else if sender.tag == 1 {
             numberOfRows = 20
             numberOfColumns = 11
@@ -41,7 +41,7 @@ class LevelsViewController: UIViewController {
         } else {
             numberOfRows = 25
             numberOfColumns = 13
-            numberOfBombs = 150
+            numberOfBombs = 100
         }
         
         if let vc = storyboard?.instantiateViewController(identifier: "Game") as? GameViewController {

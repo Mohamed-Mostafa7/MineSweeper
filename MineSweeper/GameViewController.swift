@@ -172,14 +172,21 @@ class GameViewController: UIViewController {
         if bombsArray[button.tag] == true {
             for i in 0..<bombsArray.count {
                 if bombsArray[i] == true {
-                    UIView.animate(withDuration: 2, delay: 0.1, options: .curveEaseInOut, animations: { [self] in
-                        buttons[i].backgroundColor = .red
+                    if buttons[i].currentTitle != "🚩" {
+                        buttons[i].backgroundColor = .yellow
                         buttons[i].setTitle("💣", for: .normal)
-                    }, completion: nil)
+                    }
+                }else {
+                    if buttons[i].currentTitle == "🚩" {
+                        buttons[i].setTitle("❌", for: .normal)
+                    }
                 }
             }
-            gameOver(title: "You Lost 😔")
-            bombs.text = "😢"
+            button.backgroundColor = .red
+            button.setTitle("💣", for: .normal)
+            
+            gameOver(title: "You Lost 😵")
+            bombs.text = "😵"
         } else {
             explodeButton(button: button)
         }
