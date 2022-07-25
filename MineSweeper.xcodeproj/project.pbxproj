@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E9CB7BBB288E2ECD004CFA5F /* CustomLevelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB7BBA288E2ECD004CFA5F /* CustomLevelButton.swift */; };
+		E9CB7BBF288E3404004CFA5F /* LevelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB7BBE288E3404004CFA5F /* LevelInfo.swift */; };
 		E9D545662657F5140059D6B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D545652657F5140059D6B7 /* AppDelegate.swift */; };
 		E9D545682657F5140059D6B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D545672657F5140059D6B7 /* SceneDelegate.swift */; };
 		E9D5456A2657F5140059D6B7 /* LevelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D545692657F5140059D6B7 /* LevelsViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E9CB7BBA288E2ECD004CFA5F /* CustomLevelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLevelButton.swift; sourceTree = "<group>"; };
+		E9CB7BBE288E3404004CFA5F /* LevelInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelInfo.swift; sourceTree = "<group>"; };
 		E9D545622657F5140059D6B7 /* MineSweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MineSweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D545652657F5140059D6B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9D545672657F5140059D6B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +43,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E9CB7BC1288E34E9004CFA5F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E9D545692657F5140059D6B7 /* LevelsViewController.swift */,
+				E9D5457B2657F5CA0059D6B7 /* GameViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E9CB7BC3288E34FA004CFA5F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E9CB7BBE288E3404004CFA5F /* LevelInfo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E9CB7BC5288E3526004CFA5F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E9CB7BBA288E2ECD004CFA5F /* CustomLevelButton.swift */,
+				E9D5456B2657F5140059D6B7 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E9D545592657F5140059D6B7 = {
 			isa = PBXGroup;
 			children = (
@@ -60,9 +90,9 @@
 			children = (
 				E9D545652657F5140059D6B7 /* AppDelegate.swift */,
 				E9D545672657F5140059D6B7 /* SceneDelegate.swift */,
-				E9D545692657F5140059D6B7 /* LevelsViewController.swift */,
-				E9D5457B2657F5CA0059D6B7 /* GameViewController.swift */,
-				E9D5456B2657F5140059D6B7 /* Main.storyboard */,
+				E9CB7BC3288E34FA004CFA5F /* Models */,
+				E9CB7BC5288E3526004CFA5F /* Views */,
+				E9CB7BC1288E34E9004CFA5F /* Controllers */,
 				E9D5456E2657F5170059D6B7 /* Assets.xcassets */,
 				E9D545702657F5170059D6B7 /* LaunchScreen.storyboard */,
 				E9D545732657F5170059D6B7 /* Info.plist */,
@@ -144,6 +174,8 @@
 				E9D5456A2657F5140059D6B7 /* LevelsViewController.swift in Sources */,
 				E9D545662657F5140059D6B7 /* AppDelegate.swift in Sources */,
 				E9D545682657F5140059D6B7 /* SceneDelegate.swift in Sources */,
+				E9CB7BBF288E3404004CFA5F /* LevelInfo.swift in Sources */,
+				E9CB7BBB288E2ECD004CFA5F /* CustomLevelButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
