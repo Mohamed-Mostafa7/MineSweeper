@@ -12,20 +12,18 @@ class GameViewController: UIViewController {
     var numberOfBombs: Int?
     var remainingBombsNumber = 0 {
         didSet {
-            bombs.text = "\(remainingBombsNumber) 💣"
+            bombsLabel.text = "\(remainingBombsNumber) 💣"
         }
     }
     var numberOfColumns: Int?
     var smashedBombsCounter = 0
     var buttons = [UIButton]()
     let buttonsView = UIView()
-    var navigationBarHeight: CGFloat = 0.0
     var bombsArray = [Bool]()
     var touchedBombs = [Int]()
     var gameTimer: Timer?
     
-    var time = UILabel()
-    var bombs = UILabel()
+    var bombsLabel = UILabel()
     // this is the timer count
     var secondsCounter = 0
     
@@ -51,29 +49,21 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         remainingBombsNumber = numberOfBombs ?? 0
-        
-        // MARK: - Timer
         startTimer()
         
         // MARK: - navigationBar items
         if let navigationBar = self.navigationController?.navigationBar {
             let remainingBombs = CGRect(x: navigationBar.frame.width - 60, y: 0, width: 60, height: navigationBar.frame.height)
-            let timer = CGRect(x: navigationBar.frame.width/2 - 30, y: 0, width: 60, height: navigationBar.frame.height)
 
-            bombs = UILabel(frame: remainingBombs)
-            bombs.textAlignment = .center
-            bombs.text = "\(remainingBombsNumber) 💣"
+            bombsLabel = UILabel(frame: remainingBombs)
+            bombsLabel.textAlignment = .center
+            bombsLabel.text = "\(remainingBombsNumber) 💣"
+            title = "00:00"
 
-            time = UILabel(frame: timer)
-            time.textAlignment = .left
-            time.text = "00:00"
-
-            navigationBar.addSubview(bombs)
-            navigationBar.addSubview(time)
+            navigationBar.addSubview(bombsLabel)
         }
         
     }
-    
     
     override func viewDidLayoutSubviews() {
         
@@ -111,13 +101,11 @@ class GameViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         gameTimer?.invalidate()
-        time.removeFromSuperview()
-        bombs.removeFromSuperview()
+        bombsLabel.removeFromSuperview()
     }
     
     
     func startTimer() {
-        
         gameTimer?.invalidate()
         gameTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
             self.secondsCounter += 1
@@ -126,14 +114,9 @@ class GameViewController: UIViewController {
             var stringSeconds = "\(seconds)"
             var stringMinutes = "\(minutes)"
             
-            if seconds < 10 {
-                stringSeconds = "0\(seconds)"
-            }
-            if minutes < 10 {
-                stringMinutes = "0\(minutes)"
-            }
-            self.time.text = "\(stringMinutes):\(stringSeconds)"
-            
+            stringSeconds = seconds < 10 ? "0\(seconds)" : stringSeconds
+            stringMinutes = minutes < 10 ? "0\(minutes)" : stringMinutes
+            self.title = "\(stringMinutes):\(stringSeconds)"
         }
     }
 
@@ -186,7 +169,7 @@ class GameViewController: UIViewController {
             button.setTitle("💣", for: .normal)
             
             gameOver(title: "You Lost 😵")
-            bombs.text = "😵"
+            bombsLabel.text = "😵"
         } else {
             explodeButton(button: button)
         }
@@ -226,11 +209,9 @@ class GameViewController: UIViewController {
         switch touchedBombs[button.tag] {
         case 0:
             button.setTitle("", for: .normal)
-            
         case 1:
             button.setTitle("\(touchedBombs[button.tag])", for: .normal)
             button.setTitleColor(.blue, for: .normal)
-            
         case 2:
             button.setTitle("\(touchedBombs[button.tag])", for: .normal)
             button.setTitleColor(.orange, for: .normal)
@@ -244,7 +225,7 @@ class GameViewController: UIViewController {
         
         if smashedBombsCounter == buttons.count - (numberOfBombs ?? 0) {
             gameOver(title: "Congratulations You Won 🥳")
-            bombs.text = "😃"
+            bombsLabel.text = "😃"
         }
         
     }

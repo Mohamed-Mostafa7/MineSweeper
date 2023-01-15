@@ -63,8 +63,8 @@
 		E9CB7BC5288E3526004CFA5F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E9CB7BBA288E2ECD004CFA5F /* CustomLevelButton.swift */,
 				E9D5456B2657F5140059D6B7 /* Main.storyboard */,
+				E9CB7BBA288E2ECD004CFA5F /* CustomLevelButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
